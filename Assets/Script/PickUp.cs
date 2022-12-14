@@ -1,8 +1,9 @@
 using UnityEngine;
-
+using UnityEngine.InputSystem;
 public class PickUp : MonoBehaviour
 {
     [SerializeField] private GameObject weapon;
+    [SerializeField] private PlayerInput playerInput;
     void Start()
     {
         if (weapon.activeInHierarchy) // Make sure that object inActive at start
@@ -18,6 +19,8 @@ public class PickUp : MonoBehaviour
             if (!weapon.activeInHierarchy) 
             {
                 weapon.SetActive(true); // Active object that already attached in player
+                playerInput.enabled = true;
+                Destroy(this.gameObject);
             }
         }
     }
