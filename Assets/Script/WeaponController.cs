@@ -5,16 +5,15 @@ public class WeaponController : MonoBehaviour
 {
     [SerializeField] private Animator _anim;
     [SerializeField] private bool isShoot = true;
-    void Start()
-    {
-        
-    }      
+    [SerializeField] private ParticleSystem muzzleEffect;
+    
     public void Shoot()
     {
         if (isShoot)
         {
             _anim.CrossFade("Pistol Trigger", 0, 0);
             isShoot = false;
+            muzzleEffect.Play();
             StartCoroutine("ResetTrigger");
         }
 

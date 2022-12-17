@@ -1,6 +1,6 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
-public class PickUp : MonoBehaviour
+public class PickUpWeapon : MonoBehaviour
 {
     [SerializeField] private GameObject weapon;
     [SerializeField] private PlayerInput playerInput;
@@ -16,7 +16,7 @@ public class PickUp : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Player"))
         {
-            if (!weapon.activeInHierarchy) 
+            if (!weapon.activeInHierarchy)
             {
                 weapon.SetActive(true); // Active object that already attached in player
                 playerInput.enabled = true;
