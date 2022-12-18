@@ -6,8 +6,6 @@ public class AmmoHandle : MonoBehaviour
     public static AmmoHandle Instance;
     public int ammoValue = 0;
 
-    [SerializeField] private Text ammoValueText;
-
 
     private void Awake()
     {
@@ -17,7 +15,7 @@ public class AmmoHandle : MonoBehaviour
     public int GetAmmo(int value)
     {
         ammoValue += value;
-        UpdateAmmoValue(ammoValue);
+        UIHandle.Instance.UpdateAmmoValue(ammoValue);
         return ammoValue;
     }
 
@@ -26,14 +24,11 @@ public class AmmoHandle : MonoBehaviour
         if(ammoValue > 0)
         {
             ammoValue -= value;
-            UpdateAmmoValue(ammoValue);
+            UIHandle.Instance.UpdateAmmoValue(ammoValue);
         }
         return ammoValue;
 
     }
 
-    private void UpdateAmmoValue(int ammoValue)
-    {
-        ammoValueText.text = "Ammo: " + ammoValue;
-    }
+
 }
