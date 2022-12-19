@@ -6,7 +6,7 @@ public class Enemy : MonoBehaviour
     public static Enemy Instance;
 
     [SerializeField] private float enemyHealth; // 
-    [SerializeField] private float maxDistance; // Khoang cach xa nhat ma ke dich co the phat hien ra nguoi choi
+    [SerializeField] private float maxDistance; // 
     [SerializeField] private Animator animator;
     [SerializeField] private GameObject burstSign;
     [SerializeField] private GameObject player;
@@ -27,7 +27,7 @@ public class Enemy : MonoBehaviour
     {
         if (enemyHealth <= 0)
         {
-            EnemyState("Dying", false);
+            EnemyState("Dying", 0);
             isDead = true;
             Destroy(this.gameObject, 7);
         }
@@ -39,11 +39,11 @@ public class Enemy : MonoBehaviour
 
             if(dist > maxDistance)
             {
-                EnemyState("Breathing Idle", false);
+                EnemyState("Breathing Idle", 0);
             }
             else
             {
-                EnemyState("Aiming", true);
+                EnemyState("Aiming", 1);
             }
         }
 
@@ -57,11 +57,11 @@ public class Enemy : MonoBehaviour
     }
 
 
-    private void EnemyState(string animationState, bool isBurst)
+    private void EnemyState(string animationState, float endValue)
     {
         if (!isDead)
         {
-            burstSign.SetActive(isBurst);
+            burstSign.transform.DOScale(endValue, 0.15f);
             animator.CrossFade(animationState, 0.1f, 0);
         }
     }
