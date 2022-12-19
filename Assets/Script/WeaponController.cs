@@ -7,7 +7,9 @@ public class WeaponController : MonoBehaviour
     [SerializeField] private bool isShoot = true;
     [SerializeField] private ParticleSystem muzzleEffect;
     [SerializeField] private Transform gunMouth;
+    [SerializeField] private Camera cam;
     [SerializeField] private float maxDistance;
+    
     
     public void Shoot()
     {
@@ -21,9 +23,8 @@ public class WeaponController : MonoBehaviour
 
 
             RaycastHit hit;
-            Ray hitRay = new Ray(gunMouth.position, gunMouth.transform.forward);
-
-            if (Physics.Raycast(hitRay, out hit))
+            Ray hitRay = new Ray(cam.transform.position, cam.transform.forward);
+            if (Physics.Raycast(hitRay, out hit, maxDistance))
             {
                 Debug.Log(hit.transform.name);
             }
@@ -40,6 +41,6 @@ public class WeaponController : MonoBehaviour
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.red;
-        Gizmos.DrawRay(gunMouth.position, gunMouth.transform.forward);
+        Gizmos.DrawRay(cam.transform.position, cam.transform.forward );
     }
 }

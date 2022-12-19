@@ -203,6 +203,8 @@ MonoBehaviour:
   _anim: {fileID: 32590076}
   isShoot: 1
   muzzleEffect: {fileID: 124630755}
+  gunMouth: {fileID: 1606260834}
+  maxDistance: 1000
 --- !u!198 &124630755 stripped
 ParticleSystem:
   m_CorrespondingSourceObject: {fileID: 198792769130808804, guid: 4543ab5e3d405ec40a8d4e9aa5165030, type: 3}
@@ -1143,6 +1145,36 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1606260833
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1606260834}
+  m_Layer: 0
+  m_Name: GunMouth
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1606260834
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1606260833}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.27, z: 0.6393}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 3699612562121382619}
+  m_RootOrder: 12
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1764214107
 GameObject:
   m_ObjectHideFlags: 0
@@ -1376,7 +1408,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 212e19ec2508ca64f8d05bcf5dbfa631, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weapon: {fileID: 4043241438205509729}
+  value: 20
 --- !u!1001 &2084445384
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2229,6 +2261,7 @@ Transform:
   - {fileID: 4747767378412300488}
   - {fileID: 7592745780952199137}
   - {fileID: 124630757}
+  - {fileID: 1606260834}
   m_Father: {fileID: 8338988565591873055}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
