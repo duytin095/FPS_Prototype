@@ -6,6 +6,8 @@ public class WeaponController : MonoBehaviour
     [SerializeField] private Animator _anim;
     [SerializeField] private bool isShoot = true;
     [SerializeField] private ParticleSystem muzzleEffect;
+    [SerializeField] private Transform gunMouth;
+    [SerializeField] private float maxDistance;
     
     public void Shoot()
     {
@@ -15,8 +17,16 @@ public class WeaponController : MonoBehaviour
             isShoot = false;
             muzzleEffect.Play();
             StartCoroutine("ResetTrigger");
-
             AmmoHandle.Instance.LostAmmo(1);
+
+
+            RaycastHit hit;
+            Ray hitRay = new Ray(gunMouth.position, gunMouth.transform.forward);
+
+            if (Physics.Raycast(hitRay, out hit))
+            {
+                Debug.Log(hit.transform.name);
+            }
         }
 
     }
@@ -27,5 +37,9 @@ public class WeaponController : MonoBehaviour
         isShoot = true;
     }
 
-
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawRay(gunMouth.position, gunMouth.transform.forward);
+    }
 }

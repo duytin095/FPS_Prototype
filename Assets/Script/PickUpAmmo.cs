@@ -2,13 +2,13 @@ using UnityEngine;
 
 public class PickUpAmmo : MonoBehaviour
 {
-    [SerializeField] private GameObject weapon;
+    [SerializeField] private int value;
 
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
         {
-            AmmoHandle.Instance.GetAmmo(5);
+            AmmoHandle.Instance.GetAmmo(value);
             Destroy(this.gameObject);
         }
     }
