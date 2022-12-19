@@ -21,12 +21,16 @@ public class WeaponController : MonoBehaviour
             StartCoroutine("ResetTrigger");
             AmmoHandle.Instance.LostAmmo(1);
 
-
+            // Track what bullet hit
             RaycastHit hit;
             Ray hitRay = new Ray(cam.transform.position, cam.transform.forward);
             if (Physics.Raycast(hitRay, out hit, maxDistance))
             {
                 Debug.Log(hit.transform.name);
+                if (hit.transform.CompareTag("Enemy"))
+                {
+                    Enemy.Instance.LostHealth(3);
+                }
             }
         }
 
