@@ -7,6 +7,7 @@ public class Enemy : MonoBehaviour
     public static Enemy Instance;
 
     [SerializeField] private float enemyHealth;
+    [SerializeField] private Animator animator;
 
     private void Awake()
     {
@@ -16,8 +17,8 @@ public class Enemy : MonoBehaviour
     {
         if(enemyHealth <= 0)
         {
-            Debug.Log("Enemy Death");
-            Destroy(this.gameObject);
+            animator.CrossFade("Dying", 0, 0);
+            Destroy(this.gameObject, 7);
         }
     }
 
