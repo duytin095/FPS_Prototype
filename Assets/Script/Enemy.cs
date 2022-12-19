@@ -10,6 +10,7 @@ public class Enemy : MonoBehaviour
     [SerializeField] private Animator animator;
     [SerializeField] private GameObject burstSign;
     [SerializeField] private GameObject player;
+    [SerializeField] private Transform lookAtPos;
 
 
     [SerializeField] private bool isDead = false;
@@ -44,6 +45,7 @@ public class Enemy : MonoBehaviour
             else
             {
                 EnemyState("Aiming", 1);
+                transform.LookAt(lookAtPos);
             }
         }
 
