@@ -10,8 +10,7 @@ public class WeaponController : MonoBehaviour
     [SerializeField] private float maxDistance;
 
     [Header("VFX")]
-    [SerializeField] private ParticleSystem muzzleEffect; 
-    [SerializeField] private GameObject hitEffect;
+    [SerializeField] private ParticleSystem muzzleEffect;
 
 
     public void Shoot()
