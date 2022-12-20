@@ -1,6 +1,5 @@
 using UnityEngine;
 using DG.Tweening;
-using System.Collections;
 
 public class Enemy : MonoBehaviour
 {
@@ -76,6 +75,7 @@ public class Enemy : MonoBehaviour
     public float LostHealth(float value)
     {
         enemyHealth -= value;
+        transform.DOShakePosition(0.2f, 0.1f, 1);
         return enemyHealth;
     }
 
