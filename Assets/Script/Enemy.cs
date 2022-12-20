@@ -49,6 +49,7 @@ public class Enemy : MonoBehaviour
             if(dist > maxDistance)
             {
                 EnemyState("Breathing Idle", 0);
+                coolDown = 0; // Reset cool down time allow enemy to shoot instantly if it see player again
             }
             else
             {
@@ -97,6 +98,8 @@ public class Enemy : MonoBehaviour
             if (raycastHit.transform.CompareTag("Player"))
             {
                 Debug.Log("Bang");
+                // Do shoot animtion
+                // Damage to player
                 coolDown = coolDownLap;
             }
         }   
