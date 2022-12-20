@@ -5,8 +5,8 @@ public class Enemy : MonoBehaviour
 {
     public static Enemy Instance;
 
-    [SerializeField] private float enemyHealth; // 
-    [SerializeField] private float maxDistance; // 
+    [SerializeField] private float enemyHealth; 
+    [SerializeField] private float maxDistance; 
     [SerializeField] private Animator animator;
     [SerializeField] private GameObject burstSign;
     [SerializeField] private GameObject player;
@@ -45,7 +45,10 @@ public class Enemy : MonoBehaviour
             else
             {
                 EnemyState("Aiming", 1);
-                transform.LookAt(lookAtPos);
+                if (!isDead)
+                {
+                    transform.LookAt(lookAtPos);
+                }
             }
         }
 
