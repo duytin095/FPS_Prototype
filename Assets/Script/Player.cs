@@ -15,7 +15,10 @@ public class Player : MonoBehaviour
     }
     void Update()
     {
-        
+        if(heath <= 0)
+        {
+            Debug.Log("Player Death");
+        }
     }
 
     public float LostHealth(float value)

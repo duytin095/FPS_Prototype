@@ -8,19 +8,17 @@ public class Enemy : MonoBehaviour
     [SerializeField] private float enemyHealth; // Enemy health, if this number <= 0 so enemy "Death"
     [SerializeField] private float maxDistance; // Max distance that enemy is able to see player
     [SerializeField] private float gunMaxDistance; // Max distance that enemy is able to see player
+    [SerializeField] private float damageDeal; // Damage deal to player
+    [SerializeField] private float coolDown;
+    [SerializeField] private float coolDownLap = 4;
+    [SerializeField] private bool isDead = false;
+
     [SerializeField] private Animator animator;
+    [SerializeField] private ParticleSystem muzzleEffect;
     [SerializeField] private GameObject burstSign; // Burst sign when enemy see player
     [SerializeField] private GameObject player; 
     [SerializeField] private Transform lookAtPos; // Looking position on player
     [SerializeField] private Transform aimingPos; // Aiming position on gun
-
-
-    [SerializeField] private bool isDead = false;
-    [SerializeField] private float coolDown;
-    [SerializeField] private float coolDownLap = 4;
-
-
-
 
 
 
@@ -54,7 +52,7 @@ public class Enemy : MonoBehaviour
             {
                 EnemyState("Aiming", 1);
 
-                if (!isDead && coolDown <=0)
+                if (!isDead)
                 {
                     transform.LookAt(lookAtPos); // Make gameobject look at target (player)
 
@@ -64,7 +62,10 @@ public class Enemy : MonoBehaviour
                     transform.rotation = Quaternion.Euler(rot);
                     //**
 
-                    ShootPlayer();
+                    if (coolDown <= 0)
+                    {
+                        ShootPlayer();
+                    }
                 }
             }
         }
@@ -78,7 +79,6 @@ public class Enemy : MonoBehaviour
         transform.DOShakePosition(0.2f, 0.1f, 1);
         return enemyHealth;
     }
-
 
     private void EnemyState(string animationState, float endValue)
     {
@@ -97,14 +97,16 @@ public class Enemy : MonoBehaviour
         {
             if (raycastHit.transform.CompareTag("Player"))
             {
-                // Do shoot animtion
-                //
-                //
+                //** Do shoot animtion
+                muzzleEffect.Play();
+                //**
 
-                Player.Instance.LostHealth(1);  // Damage to player
+                Player.Instance.LostHealth(damageDeal);  // Damage to player
                 coolDown = coolDownLap;
+                
             }
-        }   
+        }
+       
     }
 
 
