@@ -18,6 +18,7 @@ public class PickUpWeapon : MonoBehaviour
         {
             if (!weapon.activeInHierarchy)
             {
+                UIHandle.Instance.DisplayPickUpStuffName(transform.gameObject.name);
                 weapon.SetActive(true); // Active object that already attached in player
                 playerInput.enabled = true;
                 Destroy(this.gameObject);

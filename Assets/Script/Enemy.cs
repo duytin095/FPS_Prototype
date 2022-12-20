@@ -97,9 +97,11 @@ public class Enemy : MonoBehaviour
         {
             if (raycastHit.transform.CompareTag("Player"))
             {
-                Debug.Log("Bang");
                 // Do shoot animtion
-                // Damage to player
+                //
+                //
+
+                Player.Instance.LostHealth(1);  // Damage to player
                 coolDown = coolDownLap;
             }
         }   
