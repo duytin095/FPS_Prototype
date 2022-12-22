@@ -4,6 +4,7 @@ using UnityEngine.InputSystem;
 public class PickUp : MonoBehaviour
 {
     [SerializeField] private int ammoValue;
+    [SerializeField] private int healValue;
     [SerializeField] private GameObject weapon;
     [SerializeField] private PlayerInput playerInput;
 
@@ -33,6 +34,11 @@ public class PickUp : MonoBehaviour
                 playerInput.enabled = true;
                 Destroy(other.gameObject);
             }
+        }
+        if (other.gameObject.CompareTag("FirstAidKit"))
+        {
+            Player.Instance.Heal(healValue);
+            Destroy(other.gameObject);
         }
     }
 }

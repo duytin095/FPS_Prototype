@@ -3,7 +3,8 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
     public static Player Instance;
-    [SerializeField] private float heath;
+    public float heath;
+    public float maxHeath;
 
     private void Awake()
     {
@@ -12,6 +13,7 @@ public class Player : MonoBehaviour
     private void Start()
     {
         UIHandle.Instance.UpdatePlayerHeath(heath);
+        maxHeath = heath;
     }
     void Update()
     {
@@ -24,6 +26,19 @@ public class Player : MonoBehaviour
     public float LostHealth(float value)
     {
         heath -= value;
+        UIHandle.Instance.UpdatePlayerHeath(heath);
+        return heath;
+    }
+    public float Heal(float value)
+    {
+        var lostHeath = maxHeath - heath;
+        if(value > lostHeath) // Block heath go over 100 value
+        {
+            value = lostHeath;
+        }
+
+        heath += value;
+
         UIHandle.Instance.UpdatePlayerHeath(heath);
         return heath;
     }
