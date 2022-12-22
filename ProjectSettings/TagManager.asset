@@ -7,6 +7,8 @@ TagManager:
   - CinemachineTarget
   - Pistol
   - Enemy
+  - Ammo
+  - Weapon
   layers:
   - Default
   - TransparentFX

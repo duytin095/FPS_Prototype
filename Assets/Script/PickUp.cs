@@ -1,9 +1,12 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
-public class PickUpWeapon : MonoBehaviour
+
+public class PickUp : MonoBehaviour
 {
+    [SerializeField] private int ammoValue;
     [SerializeField] private GameObject weapon;
     [SerializeField] private PlayerInput playerInput;
+
     void Start()
     {
         if (weapon.activeInHierarchy) // Make sure that object inActive at start
@@ -14,14 +17,21 @@ public class PickUpWeapon : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.CompareTag("Player"))
+        if (other.CompareTag("Ammo"))
+        {
+            AmmoHandle.Instance.GetAmmo(ammoValue);
+            UIHandle.Instance.DisplayPickUpStuffName(other.tag); 
+            Destroy(other.gameObject);
+        }
+
+        if (other.gameObject.CompareTag("Weapon"))
         {
             if (!weapon.activeInHierarchy)
             {
-                UIHandle.Instance.DisplayPickUpStuffName(transform.gameObject.name);
+                UIHandle.Instance.DisplayPickUpStuffName(other.tag);
                 weapon.SetActive(true); // Active object that already attached in player
                 playerInput.enabled = true;
-                Destroy(this.gameObject);
+                Destroy(other.gameObject);
             }
         }
     }

@@ -622,6 +622,7 @@ GameObject:
   - component: {fileID: 552123224}
   - component: {fileID: 552123223}
   - component: {fileID: 552123226}
+  - component: {fileID: 552123227}
   m_Layer: 8
   m_Name: Capsule
   m_TagString: Player
@@ -719,6 +720,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   heath: 100
+--- !u!114 &552123227
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 552123221}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3363459f902ea10469f6e9cbe4590f6e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ammoValue: 20
+  weapon: {fileID: 4043241438205509729}
+  playerInput: {fileID: 32590018}
 --- !u!1 &874605735
 GameObject:
   m_ObjectHideFlags: 0
@@ -1836,10 +1852,9 @@ GameObject:
   - component: {fileID: 1971199021}
   - component: {fileID: 1971199020}
   - component: {fileID: 1971199019}
-  - component: {fileID: 1971199024}
   m_Layer: 0
   m_Name: AmmoBox
-  m_TagString: Untagged
+  m_TagString: Ammo
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1936,19 +1951,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1971199024
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1971199017}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 212e19ec2508ca64f8d05bcf5dbfa631, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  value: 20
 --- !u!1001 &2084445384
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2019,10 +2021,9 @@ GameObject:
   - component: {fileID: 2129836459}
   - component: {fileID: 2129836458}
   - component: {fileID: 2129836462}
-  - component: {fileID: 2129836464}
   m_Layer: 0
   m_Name: WeaponBox
-  m_TagString: Untagged
+  m_TagString: Weapon
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2119,20 +2120,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &2129836464
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2129836457}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b064eb07a24f88e4eb096c2facda9c4c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  weapon: {fileID: 4043241438205509729}
-  playerInput: {fileID: 32590018}
 --- !u!1 &9171100740282247
 GameObject:
   m_ObjectHideFlags: 0
