@@ -12,7 +12,6 @@ public class Player : MonoBehaviour
     }
     private void Start()
     {
-        UIHandle.Instance.UpdatePlayerHeath(heath);
         maxHeath = heath;
     }
     void Update()
@@ -27,6 +26,7 @@ public class Player : MonoBehaviour
     {
         heath -= value;
         UIHandle.Instance.UpdatePlayerHeath(heath);
+
         return heath;
     }
     public float Heal(float value)

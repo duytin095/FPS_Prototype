@@ -37,6 +37,7 @@ public class PickUp : MonoBehaviour
         }
         if (other.gameObject.CompareTag("FirstAidKit"))
         {
+            UIHandle.Instance.DisplayPickUpStuffName(other.tag);
             Player.Instance.Heal(healValue);
             Destroy(other.gameObject);
         }
