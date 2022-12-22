@@ -9,6 +9,7 @@ TagManager:
   - Enemy
   - Ammo
   - Weapon
+  - FirstAidKit
   layers:
   - Default
   - TransparentFX
