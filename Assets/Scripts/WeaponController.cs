@@ -5,12 +5,13 @@ public class WeaponController : MonoBehaviour
 {
     [SerializeField] private Animator _anim;
     [SerializeField] private bool isShoot = true;
-    
+
     [SerializeField] private Camera cam;
     [SerializeField] private float maxDistance;
 
     [Header("VFX")]
     [SerializeField] private ParticleSystem muzzleEffect;
+
 
 
     public void Shoot()
