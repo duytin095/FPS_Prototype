@@ -46,15 +46,16 @@ public class UIHandle : MonoBehaviour
         secondValue += Time.deltaTime;
         if(secondValue >= 59)
         {
+            secondValue = 0; // Reset seccond value
             minuteValue++;
             minute.text = minuteValue.ToString("00");
-            ResetTimeValue(secondValue);
+            
         }
         if (minuteValue >= 59)
         {
+            minuteValue = 0; // Reset minute value
             hourValue++;
             hour.text = hourValue.ToString("00");
-            ResetTimeValue(minuteValue);
         }
     }
     public void UpdateAmmoValue(int ammoValue)
@@ -86,10 +87,5 @@ public class UIHandle : MonoBehaviour
         yield return new WaitForSeconds(3f);
         stuffName.text = "";
         stuffName.transform.localScale = Vector3.zero;
-    }
-
-    private void ResetTimeValue(float valueToReset)
-    {
-        valueToReset = 0;
     }
 }

@@ -91,6 +91,7 @@ public class Enemy : MonoBehaviour
 
     private void ShootPlayer()
     {
+        
         RaycastHit raycastHit;
         Ray rayHit = new Ray(aimingPos.position, aimingPos.forward);
         if (Physics.Raycast(rayHit, out raycastHit, gunMaxDistance))
