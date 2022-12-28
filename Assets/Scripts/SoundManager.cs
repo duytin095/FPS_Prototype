@@ -1,11 +1,9 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class SoundManager : MonoBehaviour
 {
     public static SoundManager Instance;
-    [SerializeField] private AudioSource weaponPickUp, ammoPickUp, firstAidKitPickUp, shoot, hurt, surprise; 
+    [SerializeField] private AudioSource weaponPickUp, ammoPickUp, firstAidKitPickUp, shoot, hurt, surprise, empty, enemyShoot; 
     private void Awake()
     {
         Instance = this;
@@ -27,6 +25,10 @@ public class SoundManager : MonoBehaviour
     {
         shoot.Play();
     }
+    public void EmptyAmmo()
+    {
+        empty.Play();
+    }
     public void Hurt()
     {
         hurt.Play();
@@ -34,6 +36,10 @@ public class SoundManager : MonoBehaviour
     public void Surprise()
     {
         surprise.Play();
+    }
+    public void EnemyShoot()
+    {
+        enemyShoot.Play();
     }
 
 

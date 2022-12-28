@@ -23,6 +23,7 @@ public class WeaponController : MonoBehaviour
             muzzleEffect.Play();
             StartCoroutine("ResetTrigger");
             AmmoHandle.Instance.LostAmmo(1);
+            SoundManager.Instance.Shoot();
 
             // Track what bullet hit
             RaycastHit hit;
@@ -35,6 +36,14 @@ public class WeaponController : MonoBehaviour
                 }
             }
         }
+        if (isShoot && AmmoHandle.Instance.ammoValue <= 0)
+        {
+            SoundManager.Instance.EmptyAmmo();
+            isShoot = false;
+            StartCoroutine("ResetTrigger");
+        }
+
+
 
     }
     IEnumerator ResetTrigger() // Back to Idle animation and start count cool down

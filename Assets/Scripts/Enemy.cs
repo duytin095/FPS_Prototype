@@ -51,11 +51,11 @@ public class Enemy : MonoBehaviour
             else
             {
                 EnemyState("Aiming", 1);
+                
 
                 if (!isDead)
                 {
                     transform.LookAt(lookAtPos); // Make gameobject look at target (player)
-
                     //** Lock gameobject's rotation on x and z axis
                     Vector3 rot = Quaternion.LookRotation(lookAtPos.position - transform.position).eulerAngles;
                     rot.x = rot.z = 0;
@@ -101,7 +101,7 @@ public class Enemy : MonoBehaviour
                 //** Do shoot animtion
                 muzzleEffect.Play();
                 //**
-
+                SoundManager.Instance.EnemyShoot();
                 Player.Instance.LostHealth(damageDeal);  // Damage to player
                 coolDown = coolDownLap;
                 

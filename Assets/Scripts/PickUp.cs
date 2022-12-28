@@ -21,7 +21,8 @@ public class PickUp : MonoBehaviour
         if (other.CompareTag("Ammo"))
         {
             AmmoHandle.Instance.GetAmmo(ammoValue);
-            UIHandle.Instance.DisplayPickUpStuffName(other.tag); 
+            UIHandle.Instance.DisplayPickUpStuffName(other.tag);
+            SoundManager.Instance.AmmoPickUp();
             Destroy(other.gameObject);
         }
 
@@ -32,6 +33,7 @@ public class PickUp : MonoBehaviour
                 UIHandle.Instance.DisplayPickUpStuffName(other.tag);
                 weapon.SetActive(true); // Active object that already attached in player
                 playerInput.enabled = true;
+                SoundManager.Instance.WeaponPickUp();
                 Destroy(other.gameObject);
             }
         }
@@ -39,6 +41,7 @@ public class PickUp : MonoBehaviour
         {
             UIHandle.Instance.DisplayPickUpStuffName(other.tag);
             Player.Instance.Heal(healValue);
+            SoundManager.Instance.FirstAidKitPickUp();
             Destroy(other.gameObject);
         }
     }
