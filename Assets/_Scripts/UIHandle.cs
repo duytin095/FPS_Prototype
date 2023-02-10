@@ -22,6 +22,10 @@ public class UIHandle : MonoBehaviour
     [SerializeField] private float minuteValue;
     [SerializeField] private float secondValue;
 
+
+
+    [SerializeField] private GameObject pausePanel;
+
     
 
 
@@ -33,6 +37,11 @@ public class UIHandle : MonoBehaviour
     }
     private void Start()
     {
+        if (pausePanel.activeInHierarchy)
+        {
+            pausePanel.SetActive(false);
+        }
+
         hour.text = hourValue.ToString("00"); // Defautl hour at start
         minute.text = minuteValue.ToString("00"); // Defautl minute at start
 
@@ -88,4 +97,17 @@ public class UIHandle : MonoBehaviour
         stuffName.text = "";
         stuffName.transform.localScale = Vector3.zero;
     }
+
+    public void PauseGame()
+    {
+        pausePanel.SetActive(true);
+        Time.timeScale = 0;
+    }
+    public void ContinueGame()
+    {
+        pausePanel.SetActive(false);
+        Time.timeScale = 1;
+    }
+
+
 }

@@ -10,6 +10,7 @@ TagManager:
   - Ammo
   - Weapon
   - FirstAidKit
+  - LookAtPos
   layers:
   - Default
   - TransparentFX

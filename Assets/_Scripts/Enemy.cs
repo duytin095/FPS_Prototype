@@ -29,13 +29,15 @@ public class Enemy : MonoBehaviour
 
     void Update()
     {
+        player = GameObject.FindGameObjectWithTag("Player");
+        lookAtPos = GameObject.FindGameObjectWithTag("LookAtPos").transform;
         coolDown -= Time.deltaTime; // Cool down time allow enemy to shooting
 
         if (enemyHealth <= 0)
         {
             EnemyState("Dying", 0);
             isDead = true;
-            Destroy(this.gameObject, 7);
+            Destroy(gameObject, 7);
         }
 
         
