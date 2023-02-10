@@ -4,6 +4,7 @@ public class SoundManager : MonoBehaviour
 {
     public static SoundManager Instance;
     [SerializeField] private AudioSource weaponPickUp, ammoPickUp, firstAidKitPickUp, shoot, hurt, surprise, empty, enemyShoot; 
+    [SerializeField] private AudioSource[] shellHitGround; 
     private void Awake()
     {
         Instance = this;
@@ -42,6 +43,10 @@ public class SoundManager : MonoBehaviour
         enemyShoot.Play();
     }
 
-
+    public void ShellHitGround()
+    {
+        var randomVal = Random.Range(0, 3);
+        shellHitGround[randomVal].Play();
+    }
 
 }
