@@ -3,7 +3,7 @@ using UnityEngine;
 public class SoundManager : MonoBehaviour
 {
     public static SoundManager Instance;
-    [SerializeField] private AudioSource weaponPickUp, ammoPickUp, firstAidKitPickUp, shoot, hurt, surprise, empty, enemyShoot; 
+    [SerializeField] private AudioSource weaponPickUp, ammoPickUp, firstAidKitPickUp, shoot, hurt, surprise, empty, enemyShoot, shellHit; 
     [SerializeField] private AudioSource[] shellHitGround; 
     private void Awake()
     {
@@ -46,7 +46,7 @@ public class SoundManager : MonoBehaviour
     public void ShellHitGround()
     {
         var randomVal = Random.Range(0, 3);
-        shellHitGround[randomVal].Play();
+        shellHit.Play();
     }
 
 }

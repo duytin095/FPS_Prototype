@@ -21,6 +21,9 @@ public class Shell : MonoBehaviour
         if(collision.gameObject.layer == 6)
         {
             SoundManager.Instance.ShellHitGround();
+            Debug.Log("Hit");
+            Destroy(gameObject, 5f);
         }
     }
+
 }

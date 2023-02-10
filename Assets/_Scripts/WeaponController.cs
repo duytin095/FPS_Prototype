@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.Pool;
 
 public class WeaponController : MonoBehaviour
 {
@@ -12,12 +13,32 @@ public class WeaponController : MonoBehaviour
     [Header("VFX")]
     [SerializeField] private ParticleSystem muzzleEffect;
 
+    [SerializeField] private Shell shellPrefabs;
+    [SerializeField] private ObjectPool<Shell> pool;
 
+    private void Start()
+    {
+        pool = new ObjectPool<Shell>(() =>
+        {
+            return Instantiate(shellPrefabs);
+        }, shell =>
+        {
+            shell.gameObject.SetActive(true);
+        }, shell =>
+        {
+            shell.gameObject.SetActive(false);
+        }, shell =>
+        {
+            Destroy(shell.gameObject);
+        }, false, 100, 120);
+    }
 
     public void Shoot()
     {
         if (isShoot && AmmoHandle.Instance.ammoValue > 0)
         {
+            var shell = pool.Get();
+            Instantiate(shell, new Vector3(0, 2, 0), Quaternion.identity);
             _anim.CrossFade("Pistol Trigger", 0, 0);
             isShoot = false;
             muzzleEffect.Play();
