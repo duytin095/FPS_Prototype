@@ -1,6 +1,7 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.Pool;
+using DG.Tweening;
 
 public class WeaponController : MonoBehaviour
 {
@@ -15,12 +16,15 @@ public class WeaponController : MonoBehaviour
 
     [SerializeField] private Shell shellPrefabs;
     [SerializeField] private ObjectPool<Shell> pool;
+    [SerializeField] private Transform shellOutPos;
+    [SerializeField] private float shellForce;
 
     private void Start()
     {
+        // Create shell pool
         pool = new ObjectPool<Shell>(() =>
         {
-            return Instantiate(shellPrefabs);
+            return Instantiate(shellPrefabs, shellOutPos.position, Quaternion.identity);
         }, shell =>
         {
             shell.gameObject.SetActive(true);
@@ -37,8 +41,12 @@ public class WeaponController : MonoBehaviour
     {
         if (isShoot && AmmoHandle.Instance.ammoValue > 0)
         {
+            // Manage shell
             var shell = pool.Get();
-            Instantiate(shell, new Vector3(0, 2, 0), Quaternion.identity);
+            shell.GetComponent<Rigidbody>().AddForce(shellOutPos.transform.up * shellForce);
+            shell.GetComponent<Rigidbody>().AddTorque(Vector3.left * shellForce);
+
+
             _anim.CrossFade("Pistol Trigger", 0, 0);
             isShoot = false;
             muzzleEffect.Play();

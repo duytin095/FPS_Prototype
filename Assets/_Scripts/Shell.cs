@@ -4,24 +4,11 @@ using UnityEngine;
 
 public class Shell : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     private void OnCollisionEnter(Collision collision)
     {
         if(collision.gameObject.layer == 6)
         {
             SoundManager.Instance.ShellHitGround();
-            Debug.Log("Hit");
             Destroy(gameObject, 5f);
         }
     }
