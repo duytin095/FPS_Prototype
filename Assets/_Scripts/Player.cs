@@ -26,6 +26,7 @@ public class Player : MonoBehaviour
     {
         heath -= value;
         UIHandle.Instance.UpdatePlayerHeath(heath);
+        UIHandle.Instance.GetHitScreen();
 
         return heath;
     }

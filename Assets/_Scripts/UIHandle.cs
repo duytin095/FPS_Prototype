@@ -26,6 +26,9 @@ public class UIHandle : MonoBehaviour
 
     [SerializeField] private GameObject pausePanel;
 
+    [SerializeField] private Image redFlash;
+    [SerializeField] private float alphaVal;
+
     
 
 
@@ -109,5 +112,12 @@ public class UIHandle : MonoBehaviour
         Time.timeScale = 1;
     }
 
+    public void GetHitScreen()
+    {
+        var temp = redFlash.color; // make it become a variable so we can modify it (I dunno why?)
+        temp.a = alphaVal;
+
+        redFlash.color = temp;
+    }
 
 }
