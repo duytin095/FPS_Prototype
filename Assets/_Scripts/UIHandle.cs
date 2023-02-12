@@ -114,10 +114,21 @@ public class UIHandle : MonoBehaviour
 
     public void GetHitScreen()
     {
-        var temp = redFlash.color; // make it become a variable so we can modify it (I dunno why?)
-        temp.a = alphaVal;
-
-        redFlash.color = temp;
+        ModifyAlphaColor(alphaVal); // turn on red flash
+        StartCoroutine(nameof(ResetRedFlash)); // turn off red flash
     }
 
+    IEnumerator ResetRedFlash()
+    {
+        yield return new WaitForSeconds(0.1f);
+        ModifyAlphaColor(0); // change image's alpha value to 0 so the red flash disappear
+    }
+
+
+    public void ModifyAlphaColor(float value)
+    {
+        var temp = redFlash.color; // make it become a variable so we can modify it (I dunno why?)
+        temp.a = value;
+        redFlash.color = temp;
+    }
 }
