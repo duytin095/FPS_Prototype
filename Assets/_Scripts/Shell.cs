@@ -6,7 +6,7 @@ public class Shell : MonoBehaviour
 {
     private void OnCollisionEnter(Collision collision)
     {
-        if(collision.gameObject.layer == 6)
+        if(collision.gameObject.layer == 0)
         {
             SoundManager.Instance.ShellHitGround();
             Destroy(gameObject, 5f);

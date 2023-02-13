@@ -43,5 +43,4 @@ public class Player : MonoBehaviour
         UIHandle.Instance.UpdatePlayerHeath(heath);
         return heath;
     }
-
 }
