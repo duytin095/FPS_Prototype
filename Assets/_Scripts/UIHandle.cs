@@ -10,15 +10,14 @@ public class UIHandle : MonoBehaviour
 
     [SerializeField] private Text nameOfStuff;
     [SerializeField] private Text ammoValueText;
-    [SerializeField] private Text heathValueText;
+    [SerializeField] private Slider healthBar;
     
 
     [Space(20)]
     [Header("TIME")]
 
-    [SerializeField] private Text hour;
     [SerializeField] private Text minute;
-    [SerializeField] private float hourValue;
+    [SerializeField] private Text second;
     [SerializeField] private float minuteValue;
     [SerializeField] private float secondValue;
 
@@ -45,8 +44,8 @@ public class UIHandle : MonoBehaviour
             pausePanel.SetActive(false);
         }
 
-        hour.text = hourValue.ToString("00"); // Defautl hour at start
-        minute.text = minuteValue.ToString("00"); // Defautl minute at start
+        minute.text = minuteValue.ToString("00"); // Defautl minute at start on scene
+        second.text = secondValue.ToString("00"); // Defautl second at start on scene
 
         nameOfStuff.transform.localScale = Vector3.zero; // Make sure this object does not show up when it doesn't need
 
@@ -56,29 +55,25 @@ public class UIHandle : MonoBehaviour
     private void Update()
     {
         secondValue += Time.deltaTime;
+        second.text = secondValue.ToString("00"); //Update second value on scene
         if(secondValue >= 59)
         {
-            secondValue = 0; // Reset seccond value
+            secondValue = 0; // Reset second value
             minuteValue++;
-            minute.text = minuteValue.ToString("00");
-            
-        }
-        if (minuteValue >= 59)
-        {
-            minuteValue = 0; // Reset minute value
-            hourValue++;
-            hour.text = hourValue.ToString("00");
+            minute.text = minuteValue.ToString("00"); //Update second value on scene
+
         }
     }
     public void UpdateAmmoValue(int ammoValue)
     {
-        ammoValueText.text = "Ammo: " + ammoValue;
+        ammoValueText.text = ""+ammoValue;
     }
 
 
     public void UpdatePlayerHeath(float heathValue)
     {
-        heathValueText.text = "Heath: " + heathValue;
+        //heathValueText.text = ""+ heathValue;
+        healthBar.value = heathValue;
     }
 
 

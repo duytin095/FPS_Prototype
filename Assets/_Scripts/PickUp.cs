@@ -44,5 +44,8 @@ public class PickUp : MonoBehaviour
             SoundManager.Instance.FirstAidKitPickUp();
             Destroy(other.gameObject);
         }
+
+
     }
+
 }
