@@ -853,10 +853,31 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
+    - serializedVersion: 2
+      name: fill_cirle
+      rect:
+        serializedVersion: 2
+        x: 2704
+        y: 1224
+        width: 738
+        height: 740
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 30195c18f0c80e14f9b5d482c4deaa5d
+      internalID: 127757543
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: fc2d1116d82cf8247b2a7c87669ead1c
     internalID: 0
     vertices: []
     indices: 
@@ -877,6 +898,7 @@ TextureImporter:
       pause: 21300018
       progress_bar_background: 21300010
       bar_blue1: 21300052
+      fill_cirle: 127757543
       button1: 21300014
       bullets: 21300022
       button_pushed: 21300016
