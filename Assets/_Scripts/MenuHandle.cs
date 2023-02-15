@@ -1,5 +1,7 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
+using System.Collections;
 using DG.Tweening;
 #if UNITY_EDITOR
 using UnityEditor;
@@ -8,15 +10,13 @@ using UnityEditor;
 public class MenuHandle : MonoBehaviour
 {
 
-    [SerializeField] private GameObject mainPanel;
-    [SerializeField] private GameObject mainTitle;
-    [SerializeField] private GameObject selectStatePanel;
-    [SerializeField] private GameObject selectStateTitle;
+    [SerializeField] private GameObject mainPanel, mainTitle, selectStatePanel, selectStateTitle, loadingScreen;
+    [SerializeField] private Slider loadingBar;
     [SerializeField] private float outPos; // position to move OUT center the scene
     [SerializeField] private float inPos; // position to move INTO center the scene
     public void Play()
     {
-        SceneManager.LoadScene("Level1");
+        LoadScene("Level1");
     }
     public void QuitGame()
     {
@@ -31,20 +31,46 @@ public class MenuHandle : MonoBehaviour
 
     public void SelectState()
     {
-        mainPanel.GetComponent<RectTransform>().DOLocalMoveX(outPos, 0.7f, true);
-        mainTitle.GetComponent<RectTransform>().DOLocalMoveX(outPos, 0.7f, true);
+        MovingX(outPos, mainPanel);
+        MovingX(outPos, mainTitle);
 
+        MovingX(inPos, selectStatePanel);
+        MovingX(inPos, selectStateTitle);
 
-        selectStatePanel.GetComponent<RectTransform>().DOLocalMoveX(inPos, 0.7f, true);
-        selectStateTitle.GetComponent<RectTransform>().DOLocalMoveX(inPos, 0.7f, true);
     }
     public void BackToMain()
     {
-        mainPanel.GetComponent<RectTransform>().DOLocalMoveX(inPos, 0.7f, true);
-        mainTitle.GetComponent<RectTransform>().DOLocalMoveX(inPos, 0.7f, true);
+        MovingX(inPos, mainPanel);
+        MovingX(inPos, mainTitle);
 
 
-        selectStatePanel.GetComponent<RectTransform>().DOLocalMoveX(outPos, 0.7f, true);
-        selectStateTitle.GetComponent<RectTransform>().DOLocalMoveX(outPos, 0.7f, true);
+        MovingX(outPos, selectStatePanel);
+        MovingX(outPos, selectStateTitle);
+
     }
+
+    private void MovingX(float targetPos, GameObject gameObject)
+    {
+        gameObject.GetComponent<RectTransform>().DOLocalMoveX(targetPos, 0.7f, true);
+    }
+
+    public void LoadScene(string name)
+    {
+        StartCoroutine(LoadSceneAsync(name));
+    }
+
+    IEnumerator LoadSceneAsync(string sceneName)
+    {
+        AsyncOperation operation = SceneManager.LoadSceneAsync(sceneName);
+        loadingScreen.SetActive(true);
+
+        while (!operation.isDone)
+        {
+            float progressValue = Mathf.Clamp01(operation.progress / 0.9f);
+            loadingBar.value = progressValue;
+            yield return null;
+        }
+    }
+
+
 }

@@ -24,6 +24,7 @@ public class UIHandle : MonoBehaviour
 
 
     [SerializeField] private GameObject pausePanel;
+    private bool isPause = false;
 
     [SerializeField] private Image redFlash;
     [SerializeField] private float alphaVal;
@@ -45,7 +46,14 @@ public class UIHandle : MonoBehaviour
     {
         if (pausePanel.activeInHierarchy)
         {
-            pausePanel.SetActive(false);
+            if (!isPause)
+            {
+                PauseGame();
+            }
+            else if(isPause)
+            {
+                ContinueGame();
+            }
         }
 
         minute.text = minuteValue.ToString("00"); // Defautl minute at start on scene
@@ -69,6 +77,11 @@ public class UIHandle : MonoBehaviour
         }
 
         UpdatePlayerHeath(Player.Instance.heath);
+
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            pausePanel.SetActive(true);
+        }
 
     }
     public void UpdateAmmoValue(int ammoValue)
@@ -107,11 +120,13 @@ public class UIHandle : MonoBehaviour
     public void PauseGame()
     {
         pausePanel.SetActive(true);
+        isPause = true;
         Time.timeScale = 0;
     }
     public void ContinueGame()
     {
         pausePanel.SetActive(false);
+        isPause = false;
         Time.timeScale = 1;
     }
 
