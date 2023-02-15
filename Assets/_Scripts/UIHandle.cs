@@ -28,6 +28,10 @@ public class UIHandle : MonoBehaviour
     [SerializeField] private Image redFlash;
     [SerializeField] private float alphaVal;
 
+
+    float currentVelocity = 0;
+    [SerializeField] private float healthChangeSpeed;
+
     
 
 
@@ -63,6 +67,9 @@ public class UIHandle : MonoBehaviour
             minute.text = minuteValue.ToString("00"); //Update second value on scene
 
         }
+
+        UpdatePlayerHeath(Player.Instance.heath);
+
     }
     public void UpdateAmmoValue(int ammoValue)
     {
@@ -72,8 +79,9 @@ public class UIHandle : MonoBehaviour
 
     public void UpdatePlayerHeath(float heathValue)
     {
-        //heathValueText.text = ""+ heathValue;
-        healthBar.value = heathValue;
+        //healthBar.value = heathValue;
+        float currentHealth = Mathf.SmoothDamp(healthBar.value, heathValue, ref currentVelocity, healthChangeSpeed * Time.deltaTime);
+        healthBar.value = currentHealth;
     }
 
 

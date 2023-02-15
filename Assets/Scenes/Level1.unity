@@ -2325,6 +2325,7 @@ MonoBehaviour:
   pausePanel: {fileID: 1177744693}
   redFlash: {fileID: 1974474331}
   alphaVal: 0.2
+  healthChangeSpeed: 30
 --- !u!1 &537846559
 GameObject:
   m_ObjectHideFlags: 0
@@ -3264,7 +3265,7 @@ MonoBehaviour:
   m_MinValue: 0
   m_MaxValue: 100
   m_WholeNumbers: 0
-  m_Value: 100
+  m_Value: 0
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []

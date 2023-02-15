@@ -25,7 +25,7 @@ public class Player : MonoBehaviour
     public float LostHealth(float value)
     {
         heath -= value;
-        UIHandle.Instance.UpdatePlayerHeath(heath);
+        //UIHandle.Instance.UpdatePlayerHeath(heath);
         UIHandle.Instance.GetHitScreen();
 
         return heath;
@@ -40,7 +40,7 @@ public class Player : MonoBehaviour
 
         heath += value;
 
-        UIHandle.Instance.UpdatePlayerHeath(heath);
+        //UIHandle.Instance.UpdatePlayerHeath(heath);
         return heath;
     }
 }
