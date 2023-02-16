@@ -2,6 +2,7 @@ using UnityEngine.UI;
 using UnityEngine;
 using DG.Tweening;
 using System.Collections;
+using UnityEngine.SceneManagement;
 
 public class UIHandle : MonoBehaviour
 {
@@ -80,6 +81,19 @@ public class UIHandle : MonoBehaviour
             }
         }
 
+        if (isPause)
+        {
+            if (Input.GetKeyDown(KeyCode.M))
+            {
+                BackToMainMenu();
+                ContinueGame();
+            }
+            if (Input.GetKeyDown(KeyCode.S))
+            {
+                Setting();
+            }
+        }
+
     }
     public void UpdateAmmoValue(int ammoValue)
     {
@@ -118,15 +132,21 @@ public class UIHandle : MonoBehaviour
     {
         pausePanel.SetActive(true);
         isPause = true;
-        Debug.Log("Pause");
         Time.timeScale = 0;
     }
     public void ContinueGame()
     {
         pausePanel.SetActive(false);
         isPause = false;
-        Debug.Log("Continue");
         Time.timeScale = 1;
+    }
+    public void BackToMainMenu()
+    {
+        SceneManager.LoadScene("MainMenu");
+    }
+    public void Setting()
+    {
+
     }
 
     public void GetHitScreen()
