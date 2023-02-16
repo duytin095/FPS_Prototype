@@ -12,6 +12,7 @@ TagManager:
   - FirstAidKit
   - LookAtPos
   - Door
+  - EndPoint
   layers:
   - Default
   - TransparentFX

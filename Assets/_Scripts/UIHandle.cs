@@ -9,25 +9,25 @@ public class UIHandle : MonoBehaviour
     private float defaultHeath = 100;
     private int defaultAmmo = 0;
 
-    [SerializeField] private Text nameOfStuff;
-    [SerializeField] private Text ammoValueText;
+    [SerializeField] private Text nameOfStuff, ammoValueText;
     [SerializeField] private Slider healthBar;
     
 
     [Space(20)]
     [Header("TIME")]
 
-    [SerializeField] private Text minute;
-    [SerializeField] private Text second;
-    [SerializeField] private float minuteValue;
-    [SerializeField] private float secondValue;
+    [SerializeField] private Text minute, second;
+    [SerializeField] private float minuteValue, secondValue;
 
 
 
-    [SerializeField] private GameObject pausePanel;
+    [SerializeField] private GameObject pausePanel, overPanel;
     [SerializeField] private bool isPause = false;
+    public bool isOver = false;
 
     [SerializeField] private Image redFlash;
+    [SerializeField] private Image avatar;
+    [SerializeField] private Sprite ok, notOK, danger, dead;
     [SerializeField] private float alphaVal;
 
 
@@ -57,19 +57,23 @@ public class UIHandle : MonoBehaviour
     }
     private void Update()
     {
-        secondValue += Time.deltaTime;
-        second.text = secondValue.ToString("00"); //Update second value on scene
-        if(secondValue >= 59)
+        if (!isOver)
         {
-            secondValue = 0; // Reset second value
-            minuteValue++;
-            minute.text = minuteValue.ToString("00"); //Update second value on scene
+            secondValue += Time.deltaTime;
+            second.text = secondValue.ToString("00"); //Update second value on scene
+            if (secondValue >= 59)
+            {
+                secondValue = 0; // Reset second value
+                minuteValue++;
+                minute.text = minuteValue.ToString("00"); //Update second value on scene
 
+            }
         }
 
-        UpdatePlayerHeath(Player.Instance.heath);
+        
 
-        if (Input.GetKeyDown(KeyCode.Escape))
+
+        if (Input.GetKeyDown(KeyCode.Escape) && !isOver) // Press ESC to open or close Pause Menu
         {
             if (!isPause)
             {
@@ -81,19 +85,33 @@ public class UIHandle : MonoBehaviour
             }
         }
 
-        if (isPause)
+        if (isPause) // if the game IS PAUSED, check keyboard input to manage the game
         {
-            if (Input.GetKeyDown(KeyCode.M))
+            if (Input.GetKeyDown(KeyCode.M)) // press M = click "Main Menu" button on scene (but you actually can't click the buton on scene)
             {
                 BackToMainMenu();
                 ContinueGame();
             }
-            if (Input.GetKeyDown(KeyCode.S))
+            if (Input.GetKeyDown(KeyCode.S)) // press S = click "Setting" button on scene (but you actually can't click the buton on scene)
             {
                 Setting();
             }
         }
+        if (isOver) // if the game IS OVER, check keyboard input to manage the game
+        {
+            if (Input.GetKeyDown(KeyCode.R)) // press R = click "Restart" button on scene (but you actually can't click the buton on scene)
+            {
+                Restart();
+            }
+            if (Input.GetKeyDown(KeyCode.M)) // press M = click "Main Menu" button on scene (but you actually can't click the buton on scene)
+            {
+                BackToMainMenu();
+                ContinueGame();
+            }
 
+        }
+
+        UpdatePlayerHeath(Player.Instance.heath);
     }
     public void UpdateAmmoValue(int ammoValue)
     {
@@ -106,6 +124,7 @@ public class UIHandle : MonoBehaviour
         //healthBar.value = heathValue;
         float currentHealth = Mathf.SmoothDamp(healthBar.value, heathValue, ref currentVelocity, healthChangeSpeed * Time.deltaTime);
         healthBar.value = currentHealth;
+        AvatarChanger(heathValue);
     }
 
 
@@ -144,6 +163,19 @@ public class UIHandle : MonoBehaviour
     {
         SceneManager.LoadScene("MainMenu");
     }
+
+    public void GameOver(GameObject player)
+    {
+        isOver = true;
+        overPanel.SetActive(true);
+        player.SetActive(false); 
+        
+    }
+
+    public void Restart()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
     public void Setting()
     {
 
@@ -167,5 +199,23 @@ public class UIHandle : MonoBehaviour
         var temp = redFlash.color; // make it become a variable so we can modify it (I dunno why?)
         temp.a = value;
         redFlash.color = temp;
+    }
+
+    public void AvatarChanger(float heal)
+    {
+        if(heal <= 100 && heal >= 50)
+        {
+            avatar.sprite = ok;
+        }else if(heal <= 50 && heal > 30)
+        {
+            avatar.sprite = notOK;
+        }else if(heal <= 30 && heal > 0)
+        {
+            avatar.sprite = danger;
+        }
+        else
+        {
+            avatar.sprite = dead;
+        }
     }
 }

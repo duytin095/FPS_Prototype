@@ -18,13 +18,15 @@ public class Player : MonoBehaviour
     {
         if(heath <= 0)
         {
-            Debug.Log("Player Death");
+            UIHandle.Instance.GameOver(this.transform.parent.gameObject);
         }
+
     }
 
     public float LostHealth(float value)
     {
-        heath -= value;
+        float temp = Random.Range(value - 10f, value - 10f);
+        heath -= temp;
         //UIHandle.Instance.UpdatePlayerHeath(heath);
         UIHandle.Instance.GetHitScreen();
 

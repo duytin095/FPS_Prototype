@@ -26,11 +26,15 @@ public class Enemy : MonoBehaviour
     {
         Instance = this;
     }
-
-    void Update()
+    private void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player");
         lookAtPos = GameObject.FindGameObjectWithTag("LookAtPos").transform;
+    }
+
+    void Update()
+    {
+        
         coolDown -= Time.deltaTime; // Cool down time allow enemy to shooting
 
         if (enemyHealth <= 0)
