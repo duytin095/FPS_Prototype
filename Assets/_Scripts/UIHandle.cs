@@ -24,7 +24,7 @@ public class UIHandle : MonoBehaviour
 
 
     [SerializeField] private GameObject pausePanel;
-    private bool isPause = false;
+    [SerializeField] private bool isPause = false;
 
     [SerializeField] private Image redFlash;
     [SerializeField] private float alphaVal;
@@ -44,17 +44,7 @@ public class UIHandle : MonoBehaviour
     }
     private void Start()
     {
-        if (pausePanel.activeInHierarchy)
-        {
-            if (!isPause)
-            {
-                PauseGame();
-            }
-            else if(isPause)
-            {
-                ContinueGame();
-            }
-        }
+        
 
         minute.text = minuteValue.ToString("00"); // Defautl minute at start on scene
         second.text = secondValue.ToString("00"); // Defautl second at start on scene
@@ -80,7 +70,14 @@ public class UIHandle : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            pausePanel.SetActive(true);
+            if (!isPause)
+            {
+                PauseGame();
+            }
+            else
+            {
+                ContinueGame();
+            }
         }
 
     }
@@ -121,12 +118,14 @@ public class UIHandle : MonoBehaviour
     {
         pausePanel.SetActive(true);
         isPause = true;
+        Debug.Log("Pause");
         Time.timeScale = 0;
     }
     public void ContinueGame()
     {
         pausePanel.SetActive(false);
         isPause = false;
+        Debug.Log("Continue");
         Time.timeScale = 1;
     }
 
