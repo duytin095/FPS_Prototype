@@ -39,7 +39,7 @@ public class WeaponController : MonoBehaviour
 
     public void Shoot()
     {
-        if (isShoot && AmmoHandle.Instance.ammoValue > 0)
+        if (isShoot && AmmoHandle.Instance.ammoValue > 0 && !UIHandle.Instance.isPause)
         {
             // Manage shell
             var shell = pool.Get();

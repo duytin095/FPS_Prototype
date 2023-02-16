@@ -44,6 +44,10 @@ public class PickUp : MonoBehaviour
             SoundManager.Instance.FirstAidKitPickUp();
             Destroy(other.gameObject);
         }
+        if (other.gameObject.CompareTag("EndPoint"))
+        {
+            UIHandle.Instance.ResultBoard();
+        }
 
 
     }

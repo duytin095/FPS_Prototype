@@ -42,7 +42,6 @@ public class Player : MonoBehaviour
 
         heath += value;
 
-        //UIHandle.Instance.UpdatePlayerHeath(heath);
         return heath;
     }
 }

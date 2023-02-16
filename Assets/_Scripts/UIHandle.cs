@@ -3,6 +3,7 @@ using UnityEngine;
 using DG.Tweening;
 using System.Collections;
 using UnityEngine.SceneManagement;
+using StarterAssets;
 
 public class UIHandle : MonoBehaviour
 {
@@ -16,13 +17,27 @@ public class UIHandle : MonoBehaviour
     [Space(20)]
     [Header("TIME")]
 
-    [SerializeField] private Text minute, second;
-    [SerializeField] private float minuteValue, secondValue;
+    [SerializeField] private Text minute;
+    [SerializeField] private Text second;
+    [SerializeField] private float minuteValue;
+    [SerializeField] private float secondValue;
 
 
+    [Space(20)]
+    [Header("PANEL")]
+    [SerializeField] private GameObject pausePanel;
+    [SerializeField] private GameObject overPanel;
+    [SerializeField] private GameObject resultPanel;
 
-    [SerializeField] private GameObject pausePanel, overPanel;
-    [SerializeField] private bool isPause = false;
+    [Space(20)]
+    [Header("RESULT PANEL")]
+    [SerializeField] private Text executed;
+    [SerializeField] private Text score;
+    [SerializeField] private Text time;
+
+
+    [Space(20)]
+    public bool isPause = false;
     public bool isOver = false;
 
     [SerializeField] private Image redFlash;
@@ -34,7 +49,7 @@ public class UIHandle : MonoBehaviour
     float currentVelocity = 0;
     [SerializeField] private float healthChangeSpeed;
 
-    
+    [SerializeField] private GameObject playerCapsule;
 
 
 
@@ -152,16 +167,20 @@ public class UIHandle : MonoBehaviour
         pausePanel.SetActive(true);
         isPause = true;
         Time.timeScale = 0;
+        playerCapsule.GetComponent<FirstPersonController>().enabled = false; // Disable rotate camera when the game is paused
     }
     public void ContinueGame()
     {
         pausePanel.SetActive(false);
         isPause = false;
         Time.timeScale = 1;
+        playerCapsule.GetComponent<FirstPersonController>().enabled = true; // Give back normal control for player when the game is paused
     }
     public void BackToMainMenu()
     {
         SceneManager.LoadScene("MainMenu");
+        Time.timeScale = 0;
+        isOver = false;
     }
 
     public void GameOver(GameObject player)
@@ -170,6 +189,14 @@ public class UIHandle : MonoBehaviour
         overPanel.SetActive(true);
         player.SetActive(false); 
         
+    }
+    public void ResultBoard()
+    {
+        resultPanel.SetActive(true);
+        Time.timeScale = 0;
+        isOver = true;
+        isPause = true; //this is for make sure player can shoot when the level is end
+
     }
 
     public void Restart()
@@ -192,6 +219,7 @@ public class UIHandle : MonoBehaviour
         yield return new WaitForSeconds(0.1f);
         ModifyAlphaColor(0); // change image's alpha value to 0 so the red flash disappear
     }
+
 
 
     public void ModifyAlphaColor(float value)
@@ -218,4 +246,5 @@ public class UIHandle : MonoBehaviour
             avatar.sprite = dead;
         }
     }
+
 }
