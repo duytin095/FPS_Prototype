@@ -60,7 +60,7 @@ public class UIHandle : MonoBehaviour
     }
     private void Start()
     {
-        
+        Cursor.visible = false;
 
         minute.text = minuteValue.ToString("00"); // Defautl minute at start on scene
         second.text = secondValue.ToString("00"); // Defautl second at start on scene

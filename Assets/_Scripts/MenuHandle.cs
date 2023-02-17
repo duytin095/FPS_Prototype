@@ -14,6 +14,11 @@ public class MenuHandle : MonoBehaviour
     [SerializeField] private Slider loadingBar;
     [SerializeField] private float outPos; // position to move OUT center the scene
     [SerializeField] private float inPos; // position to move INTO center the scene
+
+    private void Start()
+    {
+        Cursor.visible = true;
+    }
     public void Play()
     {
         LoadScene("Level1");
